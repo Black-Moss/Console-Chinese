@@ -78,11 +78,6 @@
               "include": "Compile",
               "target": "Package",
               "version": "[13.0.4, )"
-            },
-            "UnityEngine.Modules": {
-              "include": "Compile",
-              "target": "Package",
-              "version": "[2022.3.18, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300\\RuntimeIdentifierGraph.json"
