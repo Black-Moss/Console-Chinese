@@ -190,10 +190,10 @@ public class ConsoleScriptPatch
             }
 
             if (command.argDescription is not { Length: > 0 }) continue;
-            var decs = command.argDescription;
-            for (int i = 0; i < decs.Length; i++)
+            var descs = command.argDescription;
+            for (int i = 0; i < descs.Length; i++)
             {
-                var d = decs[i];
+                var d = descs[i];
                 string newShortDesc = d.shortDesc;
                 string newLongDesc = d.longDesc;
 
@@ -203,7 +203,7 @@ public class ConsoleScriptPatch
                 if (argLongDescTranslations.TryGetValue(d.longDesc, out string longCn))
                     newLongDesc = longCn;
 
-                decs[i] = (newShortDesc, newLongDesc);
+                descs[i] = (newShortDesc, newLongDesc);
             }
         }
     }
