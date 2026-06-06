@@ -107,21 +107,12 @@ public class ConsoleScriptPatch
             { "Commands to run, separated by ; and spaces replaced by _", "要运行的命令，用;分隔，空格用_代替" },
             { "ID of the liquid to add", "要添加的液体ID" },
             { "mL amount of the liquid to add", "要添加的液体毫升数" },
-            {
-                "Name of object to search for. Object name has to contain this string to be found",
-                "要搜索的对象名称。对象名称必须包含此字符串"
-            },
+            { "Name of object to search for. Object name has to contain this string to be found", "要搜索的对象名称。对象名称必须包含此字符串" },
             { "Index of the object to teleport to", "要传送到的对象索引" },
             { "Name of the command to remove", "要移除的命令名称" },
-            {
-                "play to play a new track, skiptime to skip time in the current track, menu to open the MP3 menu",
-                "play播放新曲目，skiptime跳过当前曲目时间，menu打开MP3菜单"
-            },
+            { "play to play a new track, skiptime to skip time in the current track, menu to open the MP3 menu", "play播放新曲目，skiptime跳过当前曲目时间，menu打开MP3菜单" },
             { "(if skipping time) How much time to skip by", "（如果跳过时间）要跳过的时间量" },
-            {
-                "add to add new binds, clear to clear all binds and list to list all binds",
-                "add添加新绑定，clear清除所有绑定，list列出所有绑定"
-            },
+            { "add to add new binds, clear to clear all binds and list to list all binds", "add添加新绑定，clear清除所有绑定，list列出所有绑定" },
             { "(if adding) Keyboard button to bind", "（如果添加）要绑定的键盘按键" },
             { "(if adding) Commands to run, separated by ; and spaces replaced by _", "（如果添加）要运行的命令，用;分隔，空格用_代替" },
             { "How many times to repeat the command", "重复命令的次数" },
