@@ -1,0 +1,14 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="StartGame" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="$PROJECT_DIR$/StartGame.ps1" scriptParameters="&quot;F:\SteamLibrary\steamapps\common\Casualties Unknown Demo&quot; &quot;ConsoleChinese&quot; &quot;Console Chinese&quot;" commandOptions="-ExecutionPolicy Bypass" executablePath="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
+    <envs />
+    <method v="2">
+      <option name="Build Solution" enabled="true" />
+    </method>
+  </configuration>
+  <configuration default="false" name="StartGame" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="$PROJECT_DIR$/StartGame.ps1" scriptParameters="&quot;F:\SteamLibrary\steamapps\common\Casualties Unknown Demo&quot; &quot;ConsoleChinese&quot; &quot;Console Chinese&quot;" commandOptions="-ExecutionPolicy Bypass" executablePath="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe">
+    <envs />
+    <method v="2">
+      <option name="Build Solution" enabled="true" />
+    </method>
+  </configuration>
+</component>
