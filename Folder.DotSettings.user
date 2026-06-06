@@ -138,7 +138,6 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AConsoleScript_002Ecs_002Fl_003AC_0021_003FUsers_003FAdministrator_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E3_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F5b08a2df250f4fa7937257c7979bd2249da00_003F65_003F04f6454a_003FConsoleScript_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="E:\CasualtiesUnknownDemo\CasualtiesUnknown_Data\Managed\Assembly-CSharp.dll" /&gt;&#xD;
-  &lt;Assembly Path="E:\CasualtiesUnknownDemo\BepInEx\plugins\[生活质量]QoL-Unknown-1.0.3.1.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=addcustomcommand/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=addliquid/@EntryIndexedValue">True</s:Boolean>
