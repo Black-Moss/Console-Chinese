@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using TMPro;
@@ -197,20 +198,20 @@ public class ConsoleScriptPatch
             }
 
             if (command.argDescription is not { Length: > 0 }) continue;
-            var descs = command.argDescription;
-            for (var i = 0; i < descs.Length; i++)
+            var argDescription = command.argDescription;
+            for (var i = 0; i < argDescription.Length; i++)
             {
-                var d = descs[i];
+                var d = argDescription[i];
                 var newShortDesc = d.shortDesc;
                 var newLongDesc = d.longDesc;
 
-                if (argShortDescTranslations.TryGetValue(d.shortDesc, out string shortCn))
+                if (argShortDescTranslations.TryGetValue(d.shortDesc, out var shortCn))
                     newShortDesc = shortCn;
 
-                if (argLongDescTranslations.TryGetValue(d.longDesc, out string longCn))
+                if (argLongDescTranslations.TryGetValue(d.longDesc, out var longCn))
                     newLongDesc = longCn;
 
-                descs[i] = (newShortDesc, newLongDesc);
+                argDescription[i] = (newShortDesc, newLongDesc);
             }
         }
     }
@@ -223,6 +224,31 @@ public class ConsoleScriptPatch
         var placeholderText = __instance.input.placeholder.GetComponent<TextMeshProUGUI>();
         if (placeholderText != null)
             placeholderText.text = "输入命令 (输入 help 查看命令列表)";
+    }
+
+    [HarmonyPatch("RegisterSpawnEntities")]
+    [HarmonyPrefix]
+    public static bool RegisterSpawnEntitiesPrefix(ConsoleScript __instance)
+    {
+        if (Traverse.Create(__instance).Field<bool>("registeredSpawnEntities").Value)
+            return false;
+
+        var command = ConsoleScript.SearchExact("spawn");
+        if (command == null) return false;
+
+        var source = new List<GameObject>();
+        source.AddRange(Resources.LoadAll<GameObject>(""));
+        var list = source
+            .Where(x => (bool)(UnityEngine.Object)x.GetComponent<Item>()
+                        || (bool)(UnityEngine.Object)x.GetComponent<BuildingEntity>())
+            .ToList();
+
+        command.argAutofill ??= new Dictionary<int, List<string>>();
+
+        command.argAutofill[0] = list.Select(x => x.name).ToList();
+
+        Traverse.Create(__instance).Field<bool>("registeredSpawnEntities").Value = true;
+        return false;
     }
 
     [HarmonyPatch("CheckArgumentCount")]
