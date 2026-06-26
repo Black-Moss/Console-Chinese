@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HKjYnggOXm8=",
+  "dgSpecHash": "oUK2lnWsyGQ=",
   "success": true,
   "projectFilePath": "E:\\MossProject\\CasualtiesUnknown\\Console-Chinese\\ConsoleChinese.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.analyzers\\1.0.8\\bepinex.analyzers.1.0.8.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.assemblypublicizer.msbuild\\0.4.2\\bepinex.assemblypublicizer.msbuild.0.4.2.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.baselib\\5.4.20\\bepinex.baselib.5.4.20.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.core\\5.4.21\\bepinex.core.5.4.21.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.plugininfoprops\\2.1.0\\bepinex.plugininfoprops.2.1.0.nupkg.sha512",

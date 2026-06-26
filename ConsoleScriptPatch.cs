@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using HarmonyLib;
 using TMPro;
@@ -10,12 +9,11 @@ using Debug = System.Diagnostics.Debug;
 namespace ConsoleChinese;
 
 [HarmonyPatch(typeof(ConsoleScript))]
-[SuppressMessage("ReSharper", "InconsistentNaming")]
 public class ConsoleScriptPatch
 {
     [HarmonyPatch("RegisterAllCommands")]
     [HarmonyPostfix]
-    public static void Postfix_RegisterAllCommands()
+    public static void RegisterAllCommandsPostfix()
     {
         var commandDescriptions = new Dictionary<string, string>
         {
@@ -107,12 +105,21 @@ public class ConsoleScriptPatch
             { "Commands to run, separated by ; and spaces replaced by _", "要运行的命令，用;分隔，空格用_代替" },
             { "ID of the liquid to add", "要添加的液体ID" },
             { "mL amount of the liquid to add", "要添加的液体毫升数" },
-            { "Name of object to search for. Object name has to contain this string to be found", "要搜索的对象名称。对象名称必须包含此字符串" },
+            {
+                "Name of object to search for. Object name has to contain this string to be found",
+                "要搜索的对象名称。对象名称必须包含此字符串"
+            },
             { "Index of the object to teleport to", "要传送到的对象索引" },
             { "Name of the command to remove", "要移除的命令名称" },
-            { "play to play a new track, skiptime to skip time in the current track, menu to open the MP3 menu", "play播放新曲目，skiptime跳过当前曲目时间，menu打开MP3菜单" },
+            {
+                "play to play a new track, skiptime to skip time in the current track, menu to open the MP3 menu",
+                "play播放新曲目，skiptime跳过当前曲目时间，menu打开MP3菜单"
+            },
             { "(if skipping time) How much time to skip by", "（如果跳过时间）要跳过的时间量" },
-            { "add to add new binds, clear to clear all binds and list to list all binds", "add添加新绑定，clear清除所有绑定，list列出所有绑定" },
+            {
+                "add to add new binds, clear to clear all binds and list to list all binds",
+                "add添加新绑定，clear清除所有绑定，list列出所有绑定"
+            },
             { "(if adding) Keyboard button to bind", "（如果添加）要绑定的键盘按键" },
             { "(if adding) Commands to run, separated by ; and spaces replaced by _", "（如果添加）要运行的命令，用;分隔，空格用_代替" },
             { "How many times to repeat the command", "重复命令的次数" },
@@ -148,7 +155,7 @@ public class ConsoleScriptPatch
             { "float amount", "小数 数量" },
             { "float delay", "小数 延迟" },
             { "float", "小数" },
-            { "bool important", "布尔 重要" },
+            { "bool important", "布尔 重要程度" },
             { "bool", "布尔" },
             { "string id", "文本 ID" },
             { "string text", "文本 内容" },
@@ -184,18 +191,18 @@ public class ConsoleScriptPatch
 
         foreach (var command in ConsoleScript.Commands)
         {
-            if (commandDescriptions.TryGetValue(command.name, out string description))
+            if (commandDescriptions.TryGetValue(command.name, out var description))
             {
                 command.description = description;
             }
 
             if (command.argDescription is not { Length: > 0 }) continue;
             var descs = command.argDescription;
-            for (int i = 0; i < descs.Length; i++)
+            for (var i = 0; i < descs.Length; i++)
             {
                 var d = descs[i];
-                string newShortDesc = d.shortDesc;
-                string newLongDesc = d.longDesc;
+                var newShortDesc = d.shortDesc;
+                var newLongDesc = d.longDesc;
 
                 if (argShortDescTranslations.TryGetValue(d.shortDesc, out string shortCn))
                     newShortDesc = shortCn;
@@ -308,7 +315,7 @@ public class ConsoleScriptPatch
                     UnityEngine.Random.Range(-1f, 1f) * WorldGeneration.world.halfHeight);
                 return false;
             default:
-                string[] strArray = s.Split([','], StringSplitOptions.RemoveEmptyEntries);
+                var strArray = s.Split([','], StringSplitOptions.RemoveEmptyEntries);
                 if (strArray.Length != 2
                     || !float.TryParse(strArray[0], System.Globalization.NumberStyles.Float
                                                     | System.Globalization.NumberStyles.AllowThousands,
@@ -326,7 +333,7 @@ public class ConsoleScriptPatch
     [HarmonyPrefix]
     public static bool ParseRangeFPrefix(string s, ref RangeF __result)
     {
-        string[] strArray = s.Split(['-'], StringSplitOptions.RemoveEmptyEntries);
+        var strArray = s.Split(['-'], StringSplitOptions.RemoveEmptyEntries);
         if (strArray.Length != 2
             || !float.TryParse(strArray[0], System.Globalization.NumberStyles.Float
                                             | System.Globalization.NumberStyles.AllowThousands,
@@ -463,8 +470,8 @@ public class ConsoleScriptPatch
         match = Regex.Match(text, @"^Console (.+) color set to (.+)\.$");
         if (match.Success)
         {
-            string element = match.Groups[1].Value;
-            string elementCn = element == "text" ? "文本" : "背景";
+            var element = match.Groups[1].Value;
+            var elementCn = element == "text" ? "文本" : "背景";
             return $"已将控制台{elementCn}颜色设置为 {match.Groups[2].Value}";
         }
 
@@ -579,12 +586,9 @@ public class ConsoleScriptPatch
         }
 
         match = Regex.Match(text, @"^Instantiated (\d+) different plushies at player\.$");
-        if (match.Success)
-        {
-            return $"已在玩家位置生成了 {match.Groups[1].Value} 种不同的毛绒玩具";
-        }
-
-        return text;
+        return match.Success
+            ? $"已在玩家位置生成了 {match.Groups[1].Value} 种不同的毛绒玩具"
+            : text;
     }
 
     [HarmonyPatch("LogToConsole")]
@@ -592,10 +596,10 @@ public class ConsoleScriptPatch
     public static bool LogToConsolePrefix(ConsoleScript __instance, string text)
     {
         var t = Traverse.Create(__instance);
-        bool echo = t.Field("echo").GetValue<bool>();
+        var echo = t.Field("echo").GetValue<bool>();
         if (!echo) return false;
 
-        string translated = TranslateLogText(text);
+        var translated = TranslateLogText(text);
 
         var logs = t.Field("logs").GetValue<List<string>>();
         logs.Add(
@@ -604,7 +608,7 @@ public class ConsoleScriptPatch
         if (logs.Count > 100)
             logs.RemoveAt(0);
 
-        bool active = t.Field("active").GetValue<bool>();
+        var active = t.Field("active").GetValue<bool>();
         if (!active) return false;
         var logText = t.Field("logText").GetValue<TextMeshProUGUI>();
         if (logText != null)
